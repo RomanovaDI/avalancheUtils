@@ -172,12 +172,11 @@ def createSetFieldsFourPhasesSoilRotated(am, rg, height = 2, height_soil = 5): #
 								am.dx, 0, am.altitude[vert1] - am.altitude[vert0],\
 								0, am.dx, am.altitude[vert3] - am.altitude[vert0],\
 								0, 0, height))
-					else:
-							file.write('\trotatedBoxToCell\n\t{\n\t\torigin (%f %f %f);\n\t\ti (%f %f %f);\n\t\tj (%f %f %f);\n\t\tk (%f %f %f);\n\t\tfieldValues\n\t\t(\n\t\t\tvolScalarFieldValue alpha.liquid 0\n\t\t\tvolScalarFieldValue alpha.soil 1\n\t\t\tvolScalarFieldValue alpha.entrained 0\n\t\t\tvolScalarFieldValue alpha.gas 0\n\t\t);\n\t}\n' % (\
-								it.multi_index[0] * am.dx, it.multi_index[1] * am.dx, am.altitude[vert0] - am.alt_min + indent,\
-								am.dx, 0, am.altitude[vert1] - am.altitude[vert0],\
-								0, am.dx, am.altitude[vert3] - am.altitude[vert0],\
-								0, 0, soil_indent))
+					file.write('\trotatedBoxToCell\n\t{\n\t\torigin (%f %f %f);\n\t\ti (%f %f %f);\n\t\tj (%f %f %f);\n\t\tk (%f %f %f);\n\t\tfieldValues\n\t\t(\n\t\t\tvolScalarFieldValue alpha.liquid 0\n\t\t\tvolScalarFieldValue alpha.soil 1\n\t\t\tvolScalarFieldValue alpha.entrained 0\n\t\t\tvolScalarFieldValue alpha.gas 0\n\t\t);\n\t}\n' % (\
+						it.multi_index[0] * am.dx, it.multi_index[1] * am.dx, am.altitude[vert0] - am.alt_min + indent,\
+						am.dx, 0, am.altitude[vert1] - am.altitude[vert0],\
+						0, am.dx, am.altitude[vert3] - am.altitude[vert0],\
+						0, 0, soil_indent))
 			it.iternext()
 	file.write(');')
 	file.close()
