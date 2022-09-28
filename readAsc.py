@@ -9,17 +9,18 @@ def readFileNames(argv):
 	mapfile = 'relief_22.asc'
 	regionfile = 'region_22.asc'
 	cellsize = 0
+	dz = 0
 	flowdepth = 5
 	soildepth = 5
 	areaheight = 20
 	try:
-		opts, args = getopt.getopt(argv[1:],'hm:r:c:f:s:z:',['help', 'mapfile=','regionfile=', 'cellsize=', 'flowdepth=', 'soildepth=', 'areaheight='])
+		opts, args = getopt.getopt(argv[1:],'hm:r:c:d:f:s:z:',['help', 'mapfile=','regionfile=', 'cellsize=', 'dz=', 'flowdepth=', 'soildepth=', 'areaheight='])
 	except getopt.GetoptError:
-		print(argv[0] + '-m <map file> -r <region file> -c <cellsize> -f <flowdepth> -s <soildepth> -z <areaheight>')
+		print(argv[0] + ' -m <map file> -r <region file> -c <cellsize> -d <dz> -f <flowdepth> -s <soildepth> -z <areaheight>')
 		sys.exit(2)
 	for opt, arg in opts:
 		if opt == '-h':
-			print(argv[0] + '-m <map file> -r <region file> -c <cellsize> -f <flowdepth> -s <soildepth> -z <areaheight>')
+			print(argv[0] + '-m <map file> -r <region file> -c <cellsize> -d <dz> -f <flowdepth> -s <soildepth> -z <areaheight>')
 			sys.exit()
 		elif opt in ("-m", "--mapfile"):
 			mapfile = arg
@@ -27,6 +28,8 @@ def readFileNames(argv):
 			regionfile = arg
 		elif opt in ("-c", "--cellsize"):
 			cellsize = float(arg)
+		elif opt in ("-d", "--dz"):
+			dz = float(arg)
 		elif opt in ("-f", "--flowdepth"):
 			flowdepth = float(arg)
 		elif opt in ("-s", "--soildepth"):
@@ -36,10 +39,11 @@ def readFileNames(argv):
 	print('Map file is \"' + mapfile + '\"')
 	print('Region file is \"' + regionfile + '\"')
 	print('Cellsize is ' + str(cellsize) + ' meters')
+	print('dz is ' + str(dz) + ' meters')
 	print('Depth of flow is ' + str(flowdepth) + ' meters')
 	print('Depth of soil cover is ' + str(soildepth) + ' meters')
 	print('Depth of calculation area is ' + str(areaheight) + ' meters')
-	return mapfile, regionfile, cellsize, flowdepth, soildepth, areaheight
+	return mapfile, regionfile, cellsize, dz, flowdepth, soildepth, areaheight
 
 #def readFileNames():
 #	print("Write a file of ASCII map or type enter and file name will be \"relief_22.asc\"")

@@ -131,7 +131,9 @@ def createBlockMeshDict(am, height = 16):
 	file_blockMeshDict.close()
 	print("blockMeshDict file is ready")
 
-def createBlockMeshDictInclined(am, height = 20):
+def createBlockMeshDictInclined(am, height = 20, dz = 0):
+	if dz == 0:
+		dz = am.dx
 	print("Creating blockMeshDict file")
 	blockMeshDictFileName = "blockMeshDict"
 	file_blockMeshDict = open(blockMeshDictFileName, "w")
@@ -169,7 +171,7 @@ def createBlockMeshDictInclined(am, height = 20):
 	n_layers = 2
 	l1 = 0
 	l2 = 1
-	nz = math.ceil(height / am.dx)
+	nz = math.ceil(height / dz)
 	with np.nditer(alt_ind, flags=['multi_index'], op_flags=['readonly']) as it:
 		while not it.finished:
 			vert0 = it.multi_index
