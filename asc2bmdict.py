@@ -11,12 +11,12 @@ import setFieldsDict as sfd
 import blockMeshDict as bmd
 
 def main(argv):
-	mapfile, regionfile, cellsize, dz, flowdepth, soildepth, areaheight = ra.readFileNames(argv)
+	mapfile, regionfile, cellsize, dz, flowdepth, soildepth, areaheight, simpleGrading = ra.readFileNames(argv)
 #	map_name, region_map_name, cellsize, depthOfSnowCover, heightOfCalculationArea = ra.readFileNames(argv)
 	slope = ra.asc(mapfile, regionfile)
 	slope.am, slope.rg = ra.interpolateMap(slope.am, slope.rg, cellsize)
 	#bmd.createBlockMeshDict(slope.am, height=heightOfCalculationArea)
-	bmd.createBlockMeshDictInclined(slope.am, height=areaheight, dz=dz)
+	bmd.createBlockMeshDictInclined(slope.am, height=areaheight, dz=dz, simpleGrading=simpleGrading)
 #	sfd.createSetFieldsFourPhasesRotated(slope.am, slope.rg, height=depthOfSnowCover)
 #	sfd.createSetFieldsRotated(slope.am, slope.rg, height=depthOfSnowCover)
 #	sfd.createSetFieldsFourPhasesOnlySoilRotated(slope.am, slope.rg, height=depthOfFlow, height_soil=depthOfSoilCover)

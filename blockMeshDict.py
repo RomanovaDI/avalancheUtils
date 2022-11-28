@@ -131,7 +131,7 @@ def createBlockMeshDict(am, height = 16):
 	file_blockMeshDict.close()
 	print("blockMeshDict file is ready")
 
-def createBlockMeshDictInclined(am, height = 20, dz = 0):
+def createBlockMeshDictInclined(am, height = 20, dz = 0, simpleGrading = 1):
 	if dz == 0:
 		dz = am.dx
 	print("Creating blockMeshDict file")
@@ -184,9 +184,10 @@ def createBlockMeshDictInclined(am, height = 20, dz = 0):
 				alt_ind[vert1] != -1 and\
 				alt_ind[vert2] != -1 and\
 				alt_ind[vert3] != -1:
-					file_blockMeshDict.write("\thex (%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d)\t(1 1 %d) simpleGrading (1 1 1)\n" % \
+					file_blockMeshDict.write("\thex (%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d)\t(1 1 %d) simpleGrading (1 1 %f)\n" % \
 						(alt_ind[vert0] * n_layers+l1, alt_ind[vert1] * n_layers+l1, alt_ind[vert2] * n_layers+l1, alt_ind[vert3] * n_layers+l1,\
-						alt_ind[vert0] * n_layers + l2, alt_ind[vert1] * n_layers + l2, alt_ind[vert2] * n_layers+l2, alt_ind[vert3] * n_layers+l2, nz))
+						alt_ind[vert0] * n_layers + l2, alt_ind[vert1] * n_layers + l2, alt_ind[vert2] * n_layers+l2, alt_ind[vert3] * n_layers+l2,\
+						nz, simpleGrading))
 			it.iternext()
 	file_blockMeshDict.write(");\n\nedges\n(\n);\n\nboundary\n(\n\tslope\n\t{\n\t\ttype wall;\n\t\tfaces\n\t\t(\n")
 	with np.nditer(alt_ind, flags=['multi_index'], op_flags=['readonly']) as it:

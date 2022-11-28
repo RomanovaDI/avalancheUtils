@@ -13,14 +13,15 @@ def readFileNames(argv):
 	flowdepth = 5
 	soildepth = 5
 	areaheight = 20
+	simpleGrading = 1
 	try:
-		opts, args = getopt.getopt(argv[1:],'hm:r:c:d:f:s:z:',['help', 'mapfile=','regionfile=', 'cellsize=', 'dz=', 'flowdepth=', 'soildepth=', 'areaheight='])
+		opts, args = getopt.getopt(argv[1:],'hm:r:c:d:f:s:z:g:',['help', 'mapfile=','regionfile=', 'cellsize=', 'dz=', 'flowdepth=', 'soildepth=', 'areaheight=', 'simplegrading='])
 	except getopt.GetoptError:
-		print(argv[0] + ' -m <map file> -r <region file> -c <cellsize> -d <dz> -f <flowdepth> -s <soildepth> -z <areaheight>')
+		print(argv[0] + ' -m <map file> -r <region file> -c <cellsize> -d <dz> -f <flowdepth> -s <soildepth> -z <areaheight> -g <gradingratio>')
 		sys.exit(2)
 	for opt, arg in opts:
 		if opt == '-h':
-			print(argv[0] + '-m <map file> -r <region file> -c <cellsize> -d <dz> -f <flowdepth> -s <soildepth> -z <areaheight>')
+			print(argv[0] + '-m <map file> -r <region file> -c <cellsize> -d <dz> -f <flowdepth> -s <soildepth> -z <areaheight> -g <gradingratio>')
 			sys.exit()
 		elif opt in ("-m", "--mapfile"):
 			mapfile = arg
@@ -36,6 +37,8 @@ def readFileNames(argv):
 			soildepth = float(arg)
 		elif opt in ("-z", "--areaheight"):
 			areaheight = float(arg)
+		elif opt in ("-g", "--simplegrading")
+			simpleGrading = float(arg)
 	print('Map file is \"' + mapfile + '\"')
 	print('Region file is \"' + regionfile + '\"')
 	print('Cellsize is ' + str(cellsize) + ' meters')
@@ -43,7 +46,8 @@ def readFileNames(argv):
 	print('Depth of flow is ' + str(flowdepth) + ' meters')
 	print('Depth of soil cover is ' + str(soildepth) + ' meters')
 	print('Depth of calculation area is ' + str(areaheight) + ' meters')
-	return mapfile, regionfile, cellsize, dz, flowdepth, soildepth, areaheight
+	print('Grading ratio is' + str(simpleGrading))
+	return mapfile, regionfile, cellsize, dz, flowdepth, soildepth, areaheight, simpleGrading
 
 #def readFileNames():
 #	print("Write a file of ASCII map or type enter and file name will be \"relief_22.asc\"")
